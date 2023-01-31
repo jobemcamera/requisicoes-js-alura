@@ -1,3 +1,5 @@
+// Para abrir o banco de dados, abra o terminal e digite: npx json-server --watch db.json
+
 async function listaVideos() {
     const conexao = await fetch("http://localhost:3000/videos");
     const conexaoConvertida = await conexao.json();
@@ -25,7 +27,15 @@ async function criaVideo(titulo, descricao, url, imagem) {
     return conexaoConvertida;
 }
 
+async function buscaVideo(termoDeBusca) {
+    const conexao = await fetch(`http://localhost:3000/videos?q=${termoDeBusca}`);
+    const conexaoConvertida = conexao.json();
+
+    return conexaoConvertida;
+}
+
 export const conectaApi = {
     listaVideos, 
-    criaVideo
+    criaVideo,
+    buscaVideo
 }
